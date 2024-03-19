@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Roboto:ital,wght@0,100;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calcular Distância e Tempo</title>
+    <link rel="stylesheet" href="./style.css" />
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKZGxJgxrJ8UVedML8Wr3XTGFcCWZ91Jo&callback=initMap"
+      async
+      defer
+    ></script>
+    <script>
+      function initMap() {
+        var directionsService = new google.maps.DirectionsService()
+        var origemInput = document.getElementById("origem")
+        var destinoInput = document.getElementById("destino")
+
+        function calcularRota() {
+          var origem = origemInput.value
+          var destino = destinoInput.value
+
+          var request = {
+            origin: origem,
+            destination: destino,
+            travelMode: "DRIVING", // Pode ser 'DRIVING', 'WALKING', 'BICYCLING' ou 'TRANSIT'
+          }
+
+          directionsService.route(request, function (response, status) {
+            if (status == "OK") {
+              var distanciaText = response.routes[0].legs[0].distance.text
+              var distanciaNumeric =
+                parseFloat(response.routes[0].legs[0].distance.value) / 1000 // Distância em quilômetros
+              var duracao = response.routes[0].legs[0].duration.text
+              var valor = calcularValor(distanciaNumeric, duracao)
+              var valorMinimo = 10.0
+
+              if (valor <= valorMinimo) {
+                mostrarResultado(valorMinimo)
+              } else {
+                mostraTudo(distanciaText, duracao, valor)
+              }
+            } else {
+              mostrarErro("Erro ao calcular a rota: " + status)
+            }
+          })
+        }
+
+        function calcularValor(distanciaKm, duracao) {
+          var valorPorKm = 2.5
+          var valorPorMinuto = 0.35
+          var valorTotalKm = distanciaKm * valorPorKm
+          var valorTotalMinuto =
+            parseFloat(duracao.split(" ")[0]) * valorPorMinuto // Convertendo o tempo de viagem em minutos
+          var valorTotal = valorTotalKm + valorTotalMinuto
+          return valorTotal
+        }
+
+        function mostrarResultado(valor) {
+          var resultadoDiv = document.getElementById("resultado")
+          resultadoDiv.innerHTML = "Valor da Viagem: R$ " + valor.toFixed(2)
+        }
+
+        function mostrarDistaTempo(distanciaNumeric, duracao) {
+          return "Distancia: " + distanciaNumeric + " Tempo: " + duracao
+        }
+
+        function mostraTudo(distanciaNumeric, duracao, valor) {
+          var resultadoDiv = document.getElementById("resultado")
+          resultadoDiv.innerHTML =
+            "Valor: " +
+            valor.toFixed(2) +
+            " " +
+            mostrarDistaTempo(distanciaNumeric, duracao)
+        }
+
+        function mostrarErro(mensagem) {
+          var resultadoDiv = document.getElementById("resultado")
+          resultadoDiv.innerHTML = mensagem
+        }
+
+        document
+          .getElementById("calcular")
+          .addEventListener("click", calcularRota)
+      }
+    </script>
+  </head>
+  <body>
+    <div id="conteiner">
+      <div id="perfil">
+        <img
+          src="./assets/avatar.png"
+          alt="foto de Lucas josue alves de terno sorrindo fundo creme"
+        />
+        <p>@Lujoa18</p>
+      </div>
+
+      <div id="switch" onclick="toggleMode()">
+        <button></button>
+        <span></span>
+      </div>
+      <label for="origem">Origem:</label>
+      <input type="text" id="origem" placeholder="Endereço de Origem" /><br />
+      <label for="destino">Destino:</label>
+      <input type="text" id="destino" placeholder="Endereço de Destino" /><br />
+      <button id="calcular">Calcular</button>
+      <div id="resultado"></div>
+      <ul>
+        <li>
+          <a id="botaoVoltar " href="./index.html">Inicio</a>
+        </li>
+      </ul>
+    </div>
+    <div id="social-links">
+      <a
+        href="https://www.youtube.com/channel/UChs-VE0bvw_R6MX4YtMCGfw"
+        target="_blank"
+      >
+        <ion-icon name="logo-youtube"></ion-icon>
+      </a>
+      <a href="https://github.com/LucasJa1994" target="_blank">
+        <ion-icon name="logo-github"></ion-icon>
+      </a>
+
+      <a href="https://www.instagram.com/lucasja18/" target="_blank">
+        <ion-icon name="logo-Instagram"></ion-icon>
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/lucas-josu%C3%A9-alves/"
+        target="_blank"
+      >
+        <ion-icon name="logo-linkedin"></ion-icon>
+      </a>
+    </div>
+    <footer>
+      Feito com ♥ por
+      <a
+        href="https://app.rocketseat.com.br/discover/course/devlinks/avancando-o-html-e-css/criando-o-rodape"
+        target="_blank"
+        >Lucas</a
+      >
+    </footer>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --text-color: white;
+  --bg-url: url("./assets/bg-mobile.jpg");
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.1);
+  --surface-color-hover: rgba(0, 0, 0, 0.2);
+  --highlight-color: rgba(255, 255, 255, 0.1);
+  --switch-br-url: url("./assets/moon.svg");
+}
+
+.light {
+  --text-color: black;
+  --bg-url: url("./assets/bg-mobile-light.png");
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(0, 0, 0, 0.1);
+  --switch-br-url: url("./assets/sun.svg");
+}
+body * {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+}
+body {
+  /*
+background-image: url('./assets/bg-mobile.jpg'); /* colocando uma imagem no fundo do site
+background-repeat: no-repeat; /* nao permite que a imagem fique repetindo lado a lado 
+background-position: top center; alinha a imagem a partir do topo 
+background-size: cover; Cobre todo o espaco da pagina
+*/
+
+  /*agrupando 
+
+    backgroun: color image repeat position/size
+*/
+  background: var(--bg-url) no-repeat top center/cover;
+}
+
+#conteiner {
+  width: 360px;
+  margin: 56px auto 0px;
+  padding: 0 24px;
+}
+
+/*Perfil*/
+
+#perfil {
+  text-align: center;
+  padding: 24px;
+}
+#perfil img {
+  width: 112px;
+}
+#perfil p {
+  font-weight: 500;
+  line-height: 24px;
+  margin-top: 8px;
+}
+
+/* Switch*/
+#switch {
+  position: relative;
+  width: 64px;
+  margin: 4px auto;
+}
+
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-br-url) no-repeat center;
+  border: 0;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.light #switch button {
+  right: 0;
+  left: initial;
+}
+#switch span {
+  display: block;
+  width: 64px;
+  height: 24px;
+  border: 1px solid var(--surface-color);
+  background: var(--stroke-color);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+}
+
+/*Links*/
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0px;
+}
+
+ul li a {
+  background: var(--surface-color);
+  display: flex;
+  justify-content: center;
+  padding: 16px 24px;
+  align-items: center;
+  border: 1px solid var(--stroke-color);
+  border-radius: 8px;
+  -webkit-backdrop-filter: blur(4px);
+  text-decoration: none; /*remove a linha sublinhada*/
+  font-weight: 500;
+
+  transition: background 0.5s;
+}
+
+/*Pseudoo- selector */
+
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1px solid var(--text-color);
+}
+
+#social-links {
+  display: flex;
+  padding: 24px 0px;
+  font-size: 24px;
+  justify-content: center;
+}
+
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: background 0.2s;
+  border-radius: 50px;
+}
+
+#social-links a:hover {
+  background: var(--highlight-color);
+}
+
+footer {
+  padding: 24px 0px;
+  text-align: center;
+  font-size: 14px;
+}
+
+#conteiner1 {
+  width: 1000px;
+  margin: 56px auto 0px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+}
+
+/* Estilos adicionais para os campos de endereço (opcional) */
+#origem,
+#destino {
+  color: black;
+  margin-top: 30px;
+
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#calcular {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #1e26918a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#calcular:hover {
+  background-color: rgb(21, 52, 139); /* Cor corrigida */
+}
+
+#resultado {
+  background-color: #0b3bdb3f; /* Cor corrigida */
+  padding: 30px; /* Espaçamento interno */
+  margin-top: 10px; /* Margem superior */
+  text-align: center; /* Alinhamento do texto */
+  font-size: 16px; /* Tamanho da fonte */
+  border-radius: 5px; /* Borda arredondada */
+  width: 100%; /* Largura em porcentagem */
+  justify-content: center;
+}
+#botaoVoltar {
+  width: 65%;
+}
